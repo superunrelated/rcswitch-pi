@@ -1,5 +1,5 @@
 /*
- Usage: ./send <code>
+ Usage: ./send <code> <length>
  */
 
 #include "RCSwitch.h"
@@ -14,13 +14,14 @@ int main(int argc, char *argv[]) {
      for pin mapping of the raspberry pi GPIO connector
      */
     int PIN = 0;
-    int code = atoi(argv[1]);
+    unsigned long code = strtoul(argv[1]);
+    int length = atoi(argv[2]);
     
     if (wiringPiSetup () == -1) return 1;
-	printf("sending code[%i] \n", code);
+	printf("sending code[%lu] length[%i]\n", code, length);
 	RCSwitch mySwitch = RCSwitch();
 	mySwitch.enableTransmit(PIN);
-    mySwitch.send(code);
+    mySwitch.send(code, length);
     
 	return 0;
 }
