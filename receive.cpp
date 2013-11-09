@@ -2,28 +2,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
-
-
 int main() {
-
-
-int PIN = 1; //BCM 18, GPIO1
-
-
-
-
-    if (wiringPiSetup () == -1) return 1; //Keine Ahnung was das soll auch nicht in den Bibliotheken gefunden
-    //************************************************** ************************************************** *********************************************
-    //In Arduino Bibliothek gefunden.
-    //************************************************** ************************************************** *********************************************
-    //Versuch das in CPP zu portieren
-    RCSwitch mySwitch = RCSwitch(); // neue Instanz
-
+    int PIN = 1; //BCM 18, GPIO1
+    if (wiringPiSetup () == -1) return 1; 
+    RCSwitch mySwitch = RCSwitch();
 
     //Serial.begin(9600) kann IMHO weggelassen werden, weil wir keine Serielle Terminalsitzung benÃ¶en
-
-
+    printf("starting");
     mySwitch.enableReceive(PIN); // Receiver on inerrupt PIN
     printf("enabled");
     /*do {
@@ -43,12 +28,10 @@ int PIN = 1; //BCM 18, GPIO1
     while(true) {
         if (mySwitch.available()) {
             printf("available\n");
-            printf("%lu\n",mySwitch.getReceivedValue());
+            printf("%lu\n", mySwitch.getReceivedValue());
             mySwitch.resetAvailable();
         }
     }
 
-
-return(0);
-
+    return(0);
 }
